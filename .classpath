@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MsSQLJDBC"/>
+	<classpathentry kind="lib" path="F:/~大学/Lab/大三/firefighter0306/package/gnujaxp-1.4.4.jar.zip"/>
+	<classpathentry kind="lib" path="F:/~大学/Lab/大三/firefighter0306/package/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="F:/~大学/Lab/大三/firefighter0306/package/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="F:/~大学/Lab/大三/firefighter0306/package/mysql-connector-java-5.1.26.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

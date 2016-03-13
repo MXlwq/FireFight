@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core.ProjectElement res="/libraryManager" version="12.5">
+ <pdm.core.PdmModelElement res="数据库建模/db_library.pdm" fnam="数据库建模\db_library.pdm" oid="{3801459A-EEA0-4B85-9F23-FD809F2ECA47}">
+  <core.PackageElement res="/libraryManager/数据库建模" oid="{00000000-0000-0000-0000-000000000000}" />
+ </pdm.core.PdmModelElement>
+ <pdm.core.PdmModelElement res="数据库建模/db_libraryForwsy.pdm" fnam="数据库建模\db_libraryForwsy.pdm" oid="{FCA635AD-368F-4257-9E79-800B92C3E51F}" mdat="1198656102000">
+  <core.PackageElement res="/libraryManager/数据库建模" oid="{00000000-0000-0000-0000-000000000000}" />
+ </pdm.core.PdmModelElement>
+ <pdm.core.PdmModelElement res="数据库建模/PhysicalDataModel_1.pdm" fnam="数据库建模\PhysicalDataModel_1.pdm" oid="{AF09B74E-09EE-4014-9AD0-758AAD15BCCE}">
+  <core.PackageElement res="/libraryManager/数据库建模" oid="{00000000-0000-0000-0000-000000000000}" />
+ </pdm.core.PdmModelElement>
+</core.ProjectElement>
