@@ -808,7 +808,7 @@ public class itemDao {
 		float c = Float.parseFloat(fireTypeConfidence.substring(
 				fireTypeConfidence.indexOf(",") + 1,
 				fireTypeConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 
 		String sql = "select FireTypeid,FireTypeName from t_firetype where FireTypeName ='"
 				+ fireTypeInput + "'";
@@ -831,16 +831,15 @@ public class itemDao {
 				System.out.println("ResultStr=" + DecisionIFrame.ResultStr);
 
 			}
-			
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	/*
 	 * 操作者:Nady 功能：增加了参数String addressInput，便于在界面中显示火灾名称
@@ -856,7 +855,7 @@ public class itemDao {
 				areaConfidence.indexOf("(") + 1, areaConfidence.indexOf(",")));
 		float c = Float.parseFloat(areaConfidence.substring(
 				areaConfidence.indexOf(",") + 1, areaConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where Areaid IN ("
 				+ "select AreaId  from t_area where AreaName='"
 				+ areaInput
@@ -880,10 +879,10 @@ public class itemDao {
 				System.out.println("ResultStr=" + DecisionIFrame.ResultStr);
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -904,7 +903,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where VolumeId IN ("
 				+ "select VolumeId  from t_volume where VolumeName='"
 				+ volumeInput + "')";
@@ -922,10 +921,10 @@ public class itemDao {
 						+ volumeFireLevelName;
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -946,7 +945,7 @@ public class itemDao {
 		float c = Float.parseFloat(callTimeConfidence.substring(
 				callTimeConfidence.indexOf(",") + 1,
 				callTimeConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where CallingTimeId IN ("
 				+ "select CallingTimeId  from t_callingtime where CallingTimeName='"
 				+ callTimeInput + "')";
@@ -964,10 +963,10 @@ public class itemDao {
 						+ callTimeFireLevelName;
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -989,7 +988,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where StageId IN ("
 				+ "select StageId  from t_stage where StageName='"
 				+ phaseInput
@@ -1008,10 +1007,10 @@ public class itemDao {
 						+ phaseFireLevelName;
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1032,7 +1031,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where FireId IN ("
 				+ "select fireId  from t_fire where fireName='"
 				+ situationInput + "')";
@@ -1050,10 +1049,10 @@ public class itemDao {
 						+ fireFireLevelName;
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1074,7 +1073,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where SpreadingId IN ("
 				+ "select SpreadingId  from t_spreading where SpreadingName='"
 				+ spreadInput + "')";
@@ -1093,10 +1092,10 @@ public class itemDao {
 						+ "," + df.format(0.9 * c) + ")";
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1117,7 +1116,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where TrappedpeopleId IN ("
 				+ "select TrappedpeopleId  from t_trappedpeople where TrappedpeopleName='"
 				+ trapedPeopleInput + "')";
@@ -1137,10 +1136,10 @@ public class itemDao {
 						+ ")";
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1161,7 +1160,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where InjuredPeolpeId IN ("
 				+ "select InjuredPleopleId  from t_injuredpleople where InjuredPleopleName='"
 				+ hurtPeopleInput + "')";
@@ -1180,10 +1179,10 @@ public class itemDao {
 						+ df.format(1.0 * f) + "," + df.format(0.9 * c) + "）";
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1204,7 +1203,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-//		Write wr = new Write();
+		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where DeathTollid IN ("
 				+ "select DeathTollId  from t_deathtoll where DeathTollName='"
 				+ deathPeopleInput + "')";
@@ -1223,10 +1222,10 @@ public class itemDao {
 						+ df.format(1.0 * f) + "," + df.format(0.9 * c) + ")";
 
 			}
-//			wr.data = Float.toString(f);
-//			wr.write();
-//			wr.data = Float.toString(c);
-//			wr.write();
+			// wr.data = Float.toString(f);
+			// wr.write();
+			// wr.data = Float.toString(c);
+			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 

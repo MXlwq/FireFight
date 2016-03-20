@@ -2,24 +2,22 @@ package com.wsy.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
 
-import com.wsy.iframe.*;
-import com.wsy.model.FireType;
-import com.wsy.model.FireLevel;
+import com.wsy.iframe.DecisionIFrame;
 import com.wsy.model.Dispatch;
+import com.wsy.model.FireLevel;
+import com.wsy.model.FireType;
 import com.wsy.model.Learn;
-import com.wsy.model.SimiMsg;
 //0711
 import com.wsy.model.Operater;
+import com.wsy.model.SimiMsg;
 
 /*import com.mysql.jdbc.PreparedStatement;
  import com.mysql.jdbc.Statement;

@@ -56,8 +56,9 @@ public class DisPatchPlan extends javax.swing.JFrame {
 			dispatchPlan = new JTextArea();
 			dispatchPlan.setText(DecisionIFrame.Plan);
 			getContentPane().add(dispatchPlan, BorderLayout.CENTER);
+			dispatchPlan.setSize(400, 220);
 		}
-		this.setSize(285, 163);
+		this.setSize(400, 220);
 
 	}
 
