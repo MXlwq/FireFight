@@ -58,28 +58,28 @@ public class DecisionIFrame extends JInternalFrame {
 	static String content0;
 	static String content1;
 	static String content2;
-	static String addressInput;
-	static String fireTypeInput = "一般性建筑火灾";
-	static String areaInput = "少于-100-平米";
-	static String volumeInput = "少于-1000-立方米";
-	static String spreadInput = "无";
-	static String deathPeopleInput = "0";
-	static String hurtPeopleInput = "0";
-	static String trapedPeopleInput = "0";
-	static String situationInput = "较小";
-	static String phaseInput = "初期";
-	static String callTimeInput = "少于3次";
-	static String addressConfidence = "(1.0,0.900)";
-	static String fireTypeConfidence = "肯定(1.0,0.9)";
-	static String areaConfidence = "肯定(1.0,0.9)";
-	static String volumeConfidence = "肯定(1.0,0.9)";
-	static String spreadConfidence = "肯定(1.0,0.9)";
-	static String callTimeConfidence = "肯定(1.0,0.9)";
-	static String deathPeopleConfidence = "肯定(1.0,0.9)";
-	static String hurtPeopleConfidence = "肯定(1.0,0.9)";
-	static String trapedPeopleConfidence = "肯定(1.0,0.9)";
-	static String situationConfidence = "肯定(1.0,0.9)";
-	static String phaseConfidence = "肯定(1.0,0.9)";
+	String addressInput;
+	String fireTypeInput;
+	String areaInput;
+	String volumeInput;
+	String spreadInput;
+	String deathPeopleInput;
+	String hurtPeopleInput;
+	String trapedPeopleInput;
+	String situationInput;
+	String phaseInput;
+	String callTimeInput;
+	String addressConfidence;
+	String fireTypeConfidence;
+	String areaConfidence;
+	String volumeConfidence;
+	String spreadConfidence;
+	String callTimeConfidence;
+	String deathPeopleConfidence;
+	String hurtPeopleConfidence;
+	String trapedPeopleConfidence;
+	String situationConfidence;
+	String phaseConfidence;
 
 	/**
 	 * } Auto-generated main method to display this JFrame
@@ -185,6 +185,7 @@ public class DecisionIFrame extends JInternalFrame {
 	class CloseActionListener implements ActionListener { // 添加关闭按钮的事件监听器
 		public void actionPerformed(final ActionEvent e) {
 			doDefaultCloseAction();
+			t = 0;
 			clear c1 = new clear();
 			c1.cl();
 			ResultStr = "";
@@ -199,25 +200,23 @@ public class DecisionIFrame extends JInternalFrame {
 
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				getContent(t);// 健壮性带添加
+				getContent(t);
 				int sum = 0;
 				try {
 					for (int i = 0; i < 10; i++) {
 						if (array[i] == 0) {
-							System.out.println("i:"+i);
+							// System.out.println("i:"+i);
 							JOptionPane.showMessageDialog(null, strings[i]);
 							break;
 						}
 						sum += array[i];
-						if (sum == 10) {
+						if (sum >= 10) {
+							System.out.println("END！！！！！！！！！");
 							submitMsg();
 							command.setText(ResultStr);
-//							DisPatchPlan plan = new DisPatchPlan(
-//									"派遣方案");
-//							RefineryUtilities.centerFrameOnScreen(plan);
-//							plan.setVisible(true);// 可见
-//							plan.pack();// 窗口大小适应
-							JOptionPane.showMessageDialog(null, DecisionIFrame.Plan);
+							JOptionPane.showMessageDialog(null,
+									DecisionIFrame.Plan);
+							System.out.println("Exec！！！！！！！！！");
 						}
 					}
 				} catch (Exception e2) {
@@ -232,22 +231,21 @@ public class DecisionIFrame extends JInternalFrame {
 	}
 
 	private void getContent(int b) {
-		t=b;
+		t = b;
 		try {
 			boolean flag = false;
 			int index1, index2, index3, index4, index5, index6, index7;
 			String content = command.getText();
 			if (content.charAt(content.length() - 1) == '\n') {
-				System.out.println("有换行");
-				content = content.substring(0, content.length() - 1);
-				command.setText(content);
+				//System.out.println("有换行");
+				command.setText(content.substring(0, content.length() - 1));
 				if (t != 0) {
 					JOptionPane.showMessageDialog(null, "已忽略该问题");
 					array[t] = 1;
-					System.out.println("t:"+t);
+					// System.out.println("t:"+t);
 					t++;
 				} else {
-					if (array[0] == 0)
+					if (array[t] == 0)
 						JOptionPane.showMessageDialog(null, "必须输入火灾类别，请输入");
 					else {
 						t++;
@@ -255,33 +253,33 @@ public class DecisionIFrame extends JInternalFrame {
 				}
 
 				flag = true;
-			}
-			else {
-				
-			
-			String[] destString = content.split("\n");
-			String switchString;
-			String contentNeed = destString[destString.length - 1];
-			index1 = contentNeed.indexOf('{');
-			index2 = contentNeed.indexOf('}');
-			index3 = contentNeed.indexOf('[');
-			index4 = contentNeed.indexOf(']');
-			index5 = contentNeed.indexOf('→');
-			index6 = contentNeed.indexOf('(');
-			index7 = contentNeed.indexOf(')');
-			try {
-				content0 = contentNeed.substring(index1 + 1, index2);
-				addressInput = content0;
-				content1 = contentNeed.substring(index3 + 1, index4);
-				content2 = contentNeed.substring(index6, index7 + 1);
-				switchString = contentNeed.substring(index5 + 1, index6);
-				whichSwitch(switchString, content);
-			} catch (Exception e) {
-				// TODO: handle exception
-				if (flag == false)
-					JOptionPane.showMessageDialog(null,
-							"输入格式有问题，请按{}*[]→(,)格式输入！");
-			}
+			} else {
+				//System.out.println("没有换行");
+				String[] destString = content.split("\n");
+				String switchString;
+				String contentNeed = destString[destString.length - 1];
+				//System.out.println("contentNeed~~~"+contentNeed);
+				index1 = contentNeed.indexOf('{');
+				index2 = contentNeed.indexOf('}');
+				index3 = contentNeed.indexOf('[');
+				index4 = contentNeed.indexOf(']');
+				index5 = contentNeed.indexOf('→');
+				index6 = contentNeed.indexOf('(');
+				index7 = contentNeed.indexOf(')');
+				try {
+					content0 = contentNeed.substring(index1 + 1, index2);
+					addressInput = content0;
+					content1 = contentNeed.substring(index3 + 1, index4);
+					content2 = contentNeed.substring(index6, index7 + 1);
+					switchString = contentNeed.substring(index5 + 1, index6);
+					//System.out.println("@@@@"+content0+"@@@@"+content1+"@@@@"+content2+"@@@@"+switchString);
+					whichSwitch(switchString, content);
+				} catch (Exception e) {
+					// TODO: handle exception
+					if (flag == false)
+						JOptionPane.showMessageDialog(null,
+								"输入格式有问题，请按{}*[]→(,)格式输入！");
+				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -296,59 +294,84 @@ public class DecisionIFrame extends JInternalFrame {
 	}
 
 	public void whichSwitch(String s, String content) {
-		
-		System.out.println("heheeh");
-		if (s.compareTo("火灾类别") == 0) {
+		String eqString=s;
+		if (eqString.equals("火灾类别")) {
 			fireTypeInput = content1;
 			fireTypeConfidence = content2;
-			itemDao.areaDispatch(content0, content1, content2);
-			array[0] = 1;t++;
-		} else if (s.compareTo("火灾面积") == 0) {
+			itemDao.typeDispatch(content0, content1, content2);
+			itemDao.close();
+			array[0] = 1;
+			t++;
+			System.out.println("火灾类别");
+		} else if (eqString.equals("火灾面积")) {
 			areaInput = content1;
 			areaConfidence = content2;
+			//System.out.println("我是输出："+areaInput+areaConfidence);
 			itemDao.areaDispatch(content0, content1, content2);
-			array[1] = 1;t++;
-		} else if (s.compareTo("火灾容积") == 0) {
+			itemDao.close();
+			array[1] = 1;
+			t++;
+			System.out.println("火灾面积");
+		} else if (eqString.equals("火灾容积")) {
 			volumeInput = content1;
 			volumeConfidence = content2;
 			itemDao.volumeDispatch(content0, content1, content2);
-			array[2] = 1;t++;
-		} else if (s.compareTo("呼叫次数") == 0) {
+			itemDao.close();
+			array[2] = 1;
+			t++;
+			System.out.println("火灾容积");
+		} else if (eqString.equals("呼叫次数")) {
 			callTimeInput = content1;
 			callTimeConfidence = content2;
 			itemDao.callTimeDispatch(content0, content1, content2);
-			array[3] = 1;t++;
-		} else if (s.compareTo("所处阶段") == 0) {
+			itemDao.close();
+			array[3] = 1;
+			t++;
+		} else if (eqString.equals("所处阶段")) {
 			phaseInput = content1;
 			phaseConfidence = content2;
 			itemDao.phaseDispatch(content0, content1, content2);
-			array[4] = 1;t++;
-		} else if (s.compareTo("火灾火势") == 0) {
+			itemDao.close();
+			System.out.println("所处阶段运行");
+			array[4] = 1;
+			t++;
+		} else if (eqString.equals("火灾火势")) {
 
 			situationInput = content1;
 			situationConfidence = content2;
 			itemDao.situationDispatch(content0, content1, content2);
-			array[5] = 1;t++;
-		} else if (s.compareTo("蔓延状态") == 0) {
+			
+			itemDao.close();
+			array[5] = 1;
+			t++;
+		} else if (eqString.equals("蔓延状态")) {
 			spreadInput = content1;
 			spreadConfidence = content2;
 			itemDao.spreadDispatch(content0, content1, content2);
-			array[6] = 1;t++;
-		} else if (s.compareTo("被困人数") == 0) {
+			itemDao.close();
+			array[6] = 1;
+			t++;
+		} else if (eqString.equals("被困人数")) {
 			trapedPeopleInput = content1;
 			trapedPeopleConfidence = content2;
 			itemDao.trapedPeopleDispatch(content0, content1, content2);
-			array[7] = 1;t++;
-		} else if (s.compareTo("受伤人数") == 0) {
+			itemDao.close();
+			array[7] = 1;
+			t++;
+		} else if (eqString.equals("受伤人数")) {
 			hurtPeopleInput = content1;
 			hurtPeopleConfidence = content2;
 			itemDao.hurtPeopleDispatch(content0, content1, content2);
-			array[8] = 1;t++;
-		} else if (s.compareTo("死亡人数") == 0) {
+			itemDao.close();
+			array[8] = 1;
+			t++;
+		} else if (eqString.equals("死亡人数")) {
 			deathPeopleInput = content1;
 			deathPeopleConfidence = content2;
 			itemDao.deathPeopleDispatch(content0, content1, content2);
-			array[9] = 1;t++;
+			itemDao.close();
+			array[9] = 1;
+			t++;
 		} else {
 			JOptionPane.showMessageDialog(null, "输入格式有问题，请重新输入！");
 		}

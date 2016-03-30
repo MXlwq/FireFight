@@ -319,72 +319,9 @@ public class Dao {
 
 		// 设置小数位数
 		DecimalFormat df = new DecimalFormat("0.00");
-		// fireTypeId
-		/*
-		 * if ((fireTypeConfidence != "")&&(fireTypeInput != "")){
-		 * 
-		 * 
-		 * 
-		 * //String newInput = fireTypeInput; //String newConfidence =
-		 * fireTypeConfidence;
-		 * 
-		 * float f =
-		 * Float.parseFloat(fireTypeConfidence.substring(fireTypeConfidence
-		 * .indexOf("(")+1, fireTypeConfidence.indexOf(","))); float c =
-		 * Float.parseFloat
-		 * (fireTypeConfidence.substring(fireTypeConfidence.indexOf(",")+1,
-		 * fireTypeConfidence.indexOf(")")));
-		 * 
-		 * 
-		 * 
-		 * String sql =
-		 * "select FireTypeId  from t_firetype where FireTypeName='" +
-		 * fireTypeInput + "'"; ResultSet rs = Dao.executeQuery(sql); try {
-		 * while (rs.next()) { fireTypeId = rs.getInt("FireTypeId"); String
-		 * fireTypeName = rs.getString("FiretypeName");
-		 * System.out.println("type:"+fireTypeInput); //NewJFrame.ResultStr =
-		 * NewJFrame
-		 * .ResultStr+'\n'+"$事件→[火灾类别"+fireTypeInput+" ] => $事件→("+fireTypeId
-		 * +")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
-		 * 
-		 * System.out.println("f="+f+" c="+c);
-		 * 
-		 * 
-		 * 
-		 * 
-		 * //插进中间结论表--------- Integer newId = deathFireLevelid; sql =
-		 * "select * from mConclusion where conclusion = "+newId; ResultSet rs1
-		 * = Dao.executeQuery(sql); if (rs1.next()) { f = (float) (f*1.0); c =
-		 * (float) (c*0.9*1.0*f); float f1; float c1;
-		 * 
-		 * f1 = rs1.getFloat("f"); c1 = rs1.getFloat("c");
-		 * 
-		 * System.out.println("f="+f+" c="+c);
-		 * 
-		 * System.out.println("f1:"+f1+" c1="+c1); f =
-		 * (f*c*(1-c1)+f1*c1*(1-c))/(c*(1-c1)+c1*(1-c)); c =
-		 * (c*(1-c1)+c1*(1-c))/(c*(1-c1)+c1*(1-c)+(1-c)*(1-c1));
-		 * stmt.executeUpdate("update mConclusion" +
-		 * " set f="+f+",c="+c+" where conclusion = "+newId);
-		 * 
-		 * 
-		 * }else{
-		 * stmt.executeUpdate("insert into mConclusion(conclusion) values("
-		 * +newId+")" );
-		 * 
-		 * f = (float) (f*1.0); c = (float) (c*0.9*1.0*f);
-		 * stmt.executeUpdate("update mConclusion" +
-		 * " set f="+f+",c="+c+" where conclusion = "+newId); }
-		 * 
-		 * 
-		 * //插入中间结论结束---------
-		 * 
-		 * } } catch (Exception e) { e.printStackTrace(); }
-		 * 
-		 * }
-		 */
+		
 
-		if ((areaConfidence != "") && (areaInput != "")) {
+		if ((areaConfidence != null) && (areaInput != null)) {
 			// areaInput
 			// 插入输入表---------
 			float f = Float.parseFloat(areaConfidence.substring(
@@ -520,8 +457,6 @@ public class Dao {
 					volumeFireLevelid = rs.getInt("FireLevelid");
 					String volumeFireLevelName = rs.getString("FireLevelName");
 					System.out.println("volume:" + volumeFireLevelName);
-					// NewJFrame.ResultStr =
-					// NewJFrame.ResultStr+"\r\n"+"$事件→[容积"+volumeInput+" ] => $事件→("+volumeFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
 							+ volumeInput + "]" + "→燃烧容积Dao" + "=> {"
@@ -545,13 +480,9 @@ public class Dao {
 							+ newId;
 					ResultSet rs1 = Dao.executeQuery(sql);
 					if (rs1.next()) {
-						f = (float) (f * 1.0);
-						c = (float) (c * 0.9 * 1.0 * f);
-						float f1;
-						float c1;
 
-						f1 = rs1.getFloat("f");
-						c1 = rs1.getFloat("c");
+						float f1 = rs1.getFloat("f");
+						float c1 = rs1.getFloat("c");
 
 						System.out.println("f=" + f + " c=" + c);
 						// revision 规则
@@ -634,8 +565,6 @@ public class Dao {
 					String callTimeFireLevelName = rs
 							.getString("FireLevelName");
 					System.out.println("calltime:" + callTimeFireLevelName);
-					// NewJFrame.ResultStr =
-					// NewJFrame.ResultStr+'\n'+"$事件→[呼叫次数"+callTimeInput+" ] => $事件→("+callTimeFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
 							+ callTimeInput + "]" + "→呼叫次数Dao" + "=> {"

@@ -13,7 +13,6 @@ import com.wsy.iframe.DecisionIFrame;
 public class itemDao {
 	protected static String dbClassName = "com.mysql.jdbc.Driver";
 	protected static String dbUrl = "jdbc:mysql://localhost:3306/firefight";
-	// + "DatabaseName=db_library;SelectMethod=Cursor";
 	protected static String dbUser = "root";
 	protected static String dbPwd = "123456";
 	protected static String second = null;
@@ -60,15 +59,14 @@ public class itemDao {
 			String changeSituationInput, String deathPeopleInput,
 			String hurtPeopleInput, String trapedPeopleInput,
 			String situationInput, String phaseInput, String callTimeInput,
-			String fireTypeInput,
-
-			String addressConfidence, String areaConfidence,
-			String volumeConfidence, String spreadConfidence,
-			String controlRankConfidence, String callTimeConfidence,
-			String changeSituationConfidence, String deathPeopleConfidence,
-			String hurtPeopleConfidence, String trapedPeopleConfidence,
-			String situationConfidence, String phaseConfidence,
-			String fireTypeConfidence) throws SQLException {
+			String fireTypeInput, String addressConfidence,
+			String areaConfidence, String volumeConfidence,
+			String spreadConfidence, String controlRankConfidence,
+			String callTimeConfidence, String changeSituationConfidence,
+			String deathPeopleConfidence, String hurtPeopleConfidence,
+			String trapedPeopleConfidence, String situationConfidence,
+			String phaseConfidence, String fireTypeConfidence)
+			throws SQLException {
 
 		Integer areaFireLevelid = null;
 		Integer volumeFireLevelid = null;
@@ -81,18 +79,18 @@ public class itemDao {
 		Integer deathFireLevelid = null;
 		Integer fireTypeId = null;
 
-		// Çå¿ÕÖ®Ç°µÄ¼ÇÂ¼
+		// æ¸…ç©ºä¹‹å‰çš„è®°å½•
 		if (conn == null)
 			new itemDao();
 		CallableStatement cstmt = conn.prepareCall("call clearConclusion()");
 		cstmt.executeUpdate();
 		cstmt.close();
 
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		// areaInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		float f = Float.parseFloat(areaConfidence.substring(
 				areaConfidence.indexOf("(") + 1, areaConfidence.indexOf(",")));
 		float c = Float.parseFloat(areaConfidence.substring(
@@ -108,7 +106,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select AreaId  from t_area where AreaName='" + areaInput
 				+ "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where Areaid IN ("
 				+ "select AreaId  from t_area where AreaName='"
@@ -121,15 +119,15 @@ public class itemDao {
 				String areaFireLevelName = rs.getString("FireLevelName");
 				System.out.println("area:" + areaFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
-						+ "$ÊÂ¼þ¡ú[Ãæ»ý" + areaInput + " ] => $ÊÂ¼þ¡ú("
-						+ areaFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[é¢ç§¯" + areaInput + " ] => $äº‹ä»¶â†’("
+						+ areaFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// ²å½øÖÐ¼ä½áÂÛ±í---------
+		// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 		stmt.executeUpdate("insert into mConclusion(conclusion) values("
 				+ areaFireLevelid + ")");
 
@@ -137,11 +135,11 @@ public class itemDao {
 		c = (float) (c * 0.9 * 1.0 * f);
 		stmt.executeUpdate("update mConclusion" + " set f=" + f + ",c=" + c
 				+ " where conclusion = " + areaFireLevelid);
-		// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+		// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 		// volumeInput
 
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		String newInput = volumeInput;
 		String newConfidence = volumeConfidence;
 
@@ -159,7 +157,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select VolumeId  from t_volume where VolumeName='"
 				+ newInput + "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 
 		sql = "select FireLevelid,FireLevelName from t_firelevel where VolumeId IN ("
 				+ "select VolumeId  from t_volume where VolumeName='"
@@ -171,11 +169,11 @@ public class itemDao {
 				String volumeFireLevelName = rs.getString("FireLevelName");
 				System.out.println("volume:" + volumeFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
-						+ "$ÊÂ¼þ¡ú[ÈÝ»ý" + volumeInput + " ] => $ÊÂ¼þ¡ú("
-						+ volumeFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[å®¹ç§¯" + volumeInput + " ] => $äº‹ä»¶â†’("
+						+ volumeFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = volumeFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -208,7 +206,7 @@ public class itemDao {
 							+ ",c=" + c + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
@@ -216,7 +214,7 @@ public class itemDao {
 		}
 
 		// callTimeInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = callTimeInput;
 		newConfidence = callTimeConfidence;
 
@@ -241,7 +239,7 @@ public class itemDao {
 				+ "select CallingTimeId  from t_callingtime where CallingTimeName='"
 				+ newInput + "')");
 		System.out.println("update end");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where CallingTimeId IN ("
 				+ "select CallingTimeId  from t_callingtime where CallingTimeName='"
 				+ callTimeInput + "')";
@@ -252,11 +250,11 @@ public class itemDao {
 				String callTimeFireLevelName = rs.getString("FireLevelName");
 				System.out.println("calltime:" + callTimeFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[ºô½Ð´ÎÊý" + callTimeInput + " ] => $ÊÂ¼þ¡ú("
-						+ callTimeFireLevelName + ")£¨" + df.format(1.0 * f)
-						+ "," + df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[å‘¼å«æ¬¡æ•°" + callTimeInput + " ] => $äº‹ä»¶â†’("
+						+ callTimeFireLevelName + ")ï¼ˆ" + df.format(1.0 * f)
+						+ "," + df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = callTimeFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -286,16 +284,14 @@ public class itemDao {
 							+ ",c=" + c3 + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// phaseInput
-
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = phaseInput;
 		newConfidence = phaseConfidence;
 
@@ -313,7 +309,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select StageId  from t_stage where StageName='" + newInput
 				+ "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where StageId IN ("
 				+ "select StageId  from t_stage where StageName='"
 				+ phaseInput
@@ -325,11 +321,11 @@ public class itemDao {
 				String phaseFireLevelName = rs.getString("FireLevelName");
 				System.out.println("stage:" + phaseFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[½×¶Î" + phaseInput + " ] => $ÊÂ¼þ¡ú("
-						+ phaseFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[é˜¶æ®µ" + phaseInput + " ] => $äº‹ä»¶â†’("
+						+ phaseFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = phaseFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -360,7 +356,7 @@ public class itemDao {
 							+ ",c=" + c3 + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
@@ -368,7 +364,7 @@ public class itemDao {
 		}
 
 		// situationInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = situationInput;
 		newConfidence = situationConfidence;
 
@@ -386,7 +382,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select fireId  from t_fire where fireName='" + newInput
 				+ "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where FireId IN ("
 				+ "select fireId  from t_fire where fireName='"
 				+ situationInput + "')";
@@ -397,11 +393,11 @@ public class itemDao {
 				String fireFireLevelName = rs.getString("FireLevelName");
 				System.out.println("fire:" + fireFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[»ðÊÆ" + situationInput + " ] => $ÊÂ¼þ¡ú("
-						+ fireFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[ç«åŠ¿" + situationInput + " ] => $äº‹ä»¶â†’("
+						+ fireFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = fireFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -432,7 +428,7 @@ public class itemDao {
 							+ ",c=" + c3 + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
@@ -440,7 +436,7 @@ public class itemDao {
 		}
 
 		// spreadInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = spreadInput;
 		newConfidence = spreadConfidence;
 
@@ -458,7 +454,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select SpreadingId  from t_spreading where SpreadingName='"
 				+ newInput + "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where SpreadingId IN ("
 				+ "select SpreadingId  from t_spreading where SpreadingName='"
 				+ spreadInput + "')";
@@ -469,11 +465,11 @@ public class itemDao {
 				String spreadFireLevelName = rs.getString("FireLevelName");
 				System.out.println("spread:" + spreadFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[ÂûÑÓÇé¿ö" + spreadInput + " ] => $ÊÂ¼þ¡ú("
-						+ spreadFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[è”“å»¶æƒ…å†µ" + spreadInput + " ] => $äº‹ä»¶â†’("
+						+ spreadFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = spreadFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -504,7 +500,7 @@ public class itemDao {
 							+ ",c=" + c3 + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
@@ -512,7 +508,7 @@ public class itemDao {
 		}
 
 		// trapedPeopleInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = trapedPeopleInput;
 		newConfidence = trapedPeopleConfidence;
 
@@ -534,7 +530,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select TrappedpeopleId  from t_trappedpeople where TrappedpeopleName='"
 				+ newInput + "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where TrappedpeopleId IN ("
 				+ "select TrappedpeopleId  from t_trappedpeople where TrappedpeopleName='"
 				+ trapedPeopleInput + "')";
@@ -545,11 +541,11 @@ public class itemDao {
 				String trapedFireLevelName = rs.getString("FireLevelName");
 				System.out.println("traped:" + trapedFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[±»À§ÈËÊý" + trapedPeopleInput + " ] => $ÊÂ¼þ¡ú("
-						+ trapedFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[è¢«å›°äººæ•°" + trapedPeopleInput + " ] => $äº‹ä»¶â†’("
+						+ trapedFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = trapedFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -580,7 +576,7 @@ public class itemDao {
 							+ ",c=" + c3 + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
@@ -588,7 +584,7 @@ public class itemDao {
 		}
 
 		// hurtPeopleInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = hurtPeopleInput;
 		newConfidence = hurtPeopleConfidence;
 
@@ -610,7 +606,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select InjuredPleopleId  from t_injuredpleople where InjuredPleopleName='"
 				+ newInput + "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where InjuredPeolpeId IN ("
 				+ "select InjuredPleopleId  from t_injuredpleople where InjuredPleopleName='"
 				+ hurtPeopleInput + "')";
@@ -621,11 +617,11 @@ public class itemDao {
 				String hurtFireLevelName = rs.getString("FireLevelName");
 				System.out.println("hurt:" + hurtFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[ÊÜÉËÈËÊý" + hurtPeopleInput + " ] => $ÊÂ¼þ¡ú("
-						+ hurtFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[å—ä¼¤äººæ•°" + hurtPeopleInput + " ] => $äº‹ä»¶â†’("
+						+ hurtFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
-				// ²å½øÖÐ¼ä½áÂÛ±í---------
+				// æ’è¿›ä¸­é—´ç»“è®ºè¡¨---------
 				Integer newId = hurtFireLevelid;
 				sql = "select * from mConclusion where conclusion = " + newId;
 				ResultSet rs1 = itemDao.executeQuery(sql);
@@ -656,7 +652,7 @@ public class itemDao {
 							+ ",c=" + c3 + " where conclusion = " + newId);
 				}
 
-				// ²åÈëÖÐ¼ä½áÂÛ½áÊø---------
+				// æ’å…¥ä¸­é—´ç»“è®ºç»“æŸ---------
 
 			}
 		} catch (Exception e) {
@@ -664,7 +660,7 @@ public class itemDao {
 		}
 
 		// deathPeopleInput
-		// ²åÈëÊäÈë±í---------
+		// æ’å…¥è¾“å…¥è¡¨---------
 		newInput = deathPeopleInput;
 		newConfidence = deathPeopleConfidence;
 
@@ -682,7 +678,7 @@ public class itemDao {
 				+ " where input in ("
 				+ "select DeathTollId  from t_deathtoll where DeathTollName='"
 				+ newInput + "')");
-		// ²åÈëÊäÈë±í½áÊø-------
+		// æ’å…¥è¾“å…¥è¡¨ç»“æŸ-------
 		sql = "select FireLevelid,FireLevelName from t_firelevel where DeathTollid IN ("
 				+ "select DeathTollId  from t_deathtoll where DeathTollName='"
 				+ deathPeopleInput + "')";
@@ -693,9 +689,9 @@ public class itemDao {
 				String deathFireLevelName = rs.getString("FireLevelName");
 				System.out.println("death:" + deathFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[ËÀÍöÈËÊý" + deathPeopleInput + " ] => $ÊÂ¼þ¡ú("
-						+ deathFireLevelName + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[æ­»äº¡äººæ•°" + deathPeopleInput + " ] => $äº‹ä»¶â†’("
+						+ deathFireLevelName + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -712,28 +708,28 @@ public class itemDao {
 
 		sql = "select FireTypeId  from t_firetype where FireTypeName='"
 				+ fireTypeInput + "'";
-		System.out.println("Àà±ðsql=" + sql);
+		System.out.println("ç±»åˆ«sql=" + sql);
 		rs = itemDao.executeQuery(sql);
 		try {
 			while (rs.next()) {
 				fireTypeId = rs.getInt("FireTypeId");
 				System.out.println("type:" + fireTypeInput);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + '\n'
-						+ "$ÊÂ¼þ¡ú[»ðÔÖÀà±ð" + fireTypeInput + " ] => $ÊÂ¼þ¡ú("
-						+ fireTypeId + ")£¨" + df.format(1.0 * f) + ","
-						+ df.format(0.9 * c) + "£©";
+						+ "$äº‹ä»¶â†’[ç«ç¾ç±»åˆ«" + fireTypeInput + " ] => $äº‹ä»¶â†’("
+						+ fireTypeId + ")ï¼ˆ" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + "ï¼‰";
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// »ñÈ¡Àà±ðID
+		// èŽ·å–ç±»åˆ«ID
 		float f1 = f;
 		float c1 = c;
 		Integer typeId = fireTypeId;
 		System.out.println("TypeId=" + typeId);
 
-		// »ñÈ¡¼¶±ðID
+		// èŽ·å–çº§åˆ«ID
 
 		Integer LevelId = null;
 		cstmt = conn.prepareCall("call findMax()");
@@ -748,16 +744,13 @@ public class itemDao {
 				float f2 = rs.getFloat("f");
 				float c2 = rs.getFloat("c");
 				LevelId = rs.getInt("conclusion");
-				System.out.println("×îÖÕ¼¶±ð£ºLevelId=" + LevelId);
-				// ×îÖÕ¼¶±ðÒÑ»ñÈ¡£¬Àà±ðÒÑ»ñÈ¡
-				// ºÏÈ¡¼ÆËã
+				System.out.println("æœ€ç»ˆçº§åˆ«ï¼šLevelId=" + LevelId);
 				f = f1 * f2;
 				c = c1 * c2;
 
-				// ÅÉÇ²
+				// æ´¾é£
 				sql = "select * from t_dispatch " + "where TypeId = " + typeId
 						+ " AND LevelId = " + LevelId + ";";
-				// System.out.println("sql="+sql);
 
 				rs = itemDao.executeQuery(sql);
 				try {
@@ -766,11 +759,11 @@ public class itemDao {
 						String FireFighterNum = rs.getString("FireFighterNum");
 						String Equipment = rs.getString("Equipment");
 						DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
-								+ '\n' + "$ÊÂ¼þ¡ú[»ðÔÖÀà±ð" + typeId + " ]+[»ðÔÖ¼¶±ð "
-								+ LevelId + " ] => $ÊÂ¼þ¡ú(³ö¶¯ÈËÊý:" + FireFighterNum
-								+ ")+(Éè±¸ÊýÄ¿:" + Equipment + ")£¨"
+								+ '\n' + "$äº‹ä»¶â†’[ç«ç¾ç±»åˆ«" + typeId + " ]+[ç«ç¾çº§åˆ« "
+								+ LevelId + " ] => $äº‹ä»¶â†’(å‡ºåŠ¨äººæ•°:" + FireFighterNum
+								+ ")+(è®¾å¤‡æ•°ç›®:" + Equipment + ")ï¼ˆ"
 								+ df.format(1.0 * f) + "," + df.format(0.9 * c)
-								+ "£©";
+								+ "ï¼‰";
 
 						stmt.executeUpdate("insert into t_conclusion values("
 								+ conclu + "," + f + "," + c + ")");
@@ -790,16 +783,12 @@ public class itemDao {
 
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
-
-	// ÀîÎÄÈ«ÐÞ¸Ä£¬½«fµÄÖ¸ÕëÐÞ¸Ä£¬·ñÔò³öÏÖÎª0µÄ½á¹û
+	// æŽæ–‡å…¨ä¿®æ”¹ï¼Œå°†fçš„æŒ‡é’ˆä¿®æ”¹ï¼Œå¦åˆ™å‡ºçŽ°ä¸º0çš„ç»“æžœ
 	public static void typeDispatch(String addressInput, String fireTypeInput,
 			String fireTypeConfidence) {
 
 		Integer areaFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		float f = Float.parseFloat(fireTypeConfidence.substring(
@@ -808,54 +797,37 @@ public class itemDao {
 		float c = Float.parseFloat(fireTypeConfidence.substring(
 				fireTypeConfidence.indexOf(",") + 1,
 				fireTypeConfidence.indexOf(")")));
-		// Write wr = new Write();
-
 		String sql = "select FireTypeid,FireTypeName from t_firetype where FireTypeName ='"
 				+ fireTypeInput + "'";
 		System.out.println(sql);
 		ResultSet rs = itemDao.executeQuery(sql);
 		try {
 			while (rs.next()) {
-				// fireTypeInput = rs.getInt("FireLevelid");
 				String FireTypeName = rs.getString("FireTypeName");
 				System.out.println("firetype:" + FireTypeName);
-				// ½çÃæÏÔÊ¾
-				// NewJFrame.ResultStr =
-				// NewJFrame.ResultStr+"\r\n"+"{"+addressInput+"}"+"*"+"["+areaInput+"]"+"¡úÈ¼ÉÕÃæ»ý"+
-				// "=> $ÊÂ¼þ¡ú("+areaFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "[" + fireTypeInput
-						+ "]" + "¡ú»ðÔÖÀà±ð" + "=> {" + addressInput + "}¡ú" + "("
+						+ "]" + "â†’ç«ç¾ç±»åˆ«" + "=> {" + addressInput + "}â†’" + "("
 						+ fireTypeInput + ")(" + df.format(1.0 * f) + ","
 						+ df.format(0.9 * c) + ")";
 				System.out.println("ResultStr=" + DecisionIFrame.ResultStr);
 
 			}
-
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void areaDispatch(String addressInput, String areaInput,
 			String areaConfidence) {
 
 		Integer areaFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		float f = Float.parseFloat(areaConfidence.substring(
 				areaConfidence.indexOf("(") + 1, areaConfidence.indexOf(",")));
 		float c = Float.parseFloat(areaConfidence.substring(
 				areaConfidence.indexOf(",") + 1, areaConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where Areaid IN ("
 				+ "select AreaId  from t_area where AreaName='"
 				+ areaInput
@@ -866,34 +838,21 @@ public class itemDao {
 				areaFireLevelid = rs.getInt("FireLevelid");
 				String areaFireLevelName = rs.getString("FireLevelName");
 				System.out.println("area:" + areaFireLevelName);
-
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+"\r\n"+"$ÊÂ¼þ¡ú[Ãæ»ý"+areaInput+" ] => $ÊÂ¼þ¡ú("+areaFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
-				/**
-				 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÐÞ¸ÄÁË½çÃæÏÔÊ¾
-				 */
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + areaInput
-						+ "]¡úÃæ»ýitemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]â†’é¢ç§¯itemDao=>" + "{" + addressInput + "}" + "->"
 						+ areaFireLevelName;
 				System.out.println("ResultStr=" + DecisionIFrame.ResultStr);
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void volumeDispatch(String addressInput, String volumeInput,
 			String volumeConfidence) {
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		Integer volumeFireLevelid = null;
@@ -903,7 +862,6 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where VolumeId IN ("
 				+ "select VolumeId  from t_volume where VolumeName='"
 				+ volumeInput + "')";
@@ -913,30 +871,22 @@ public class itemDao {
 				volumeFireLevelid = rs.getInt("FireLevelid");
 				String volumeFireLevelName = rs.getString("FireLevelName");
 				System.out.println("volume:" + volumeFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+"\r\n"+"$ÊÂ¼þ¡ú[ÈÝ»ý"+volumeInput+" ] => $ÊÂ¼þ¡ú("+volumeFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
+				if (DecisionIFrame.ResultStr == null)
+					System.out.println("!!!!!!!!!1");
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + volumeInput
-						+ "]¡úÈÝ»ýitemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]â†’å®¹ç§¯itemDao=>" + "{" + addressInput + "}" + "->"
 						+ volumeFireLevelName;
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void callTimeDispatch(String addressInput,
 			String callTimeInput, String callTimeConfidence) {
 		Integer callTimeFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		float f = Float.parseFloat(callTimeConfidence.substring(
@@ -945,7 +895,7 @@ public class itemDao {
 		float c = Float.parseFloat(callTimeConfidence.substring(
 				callTimeConfidence.indexOf(",") + 1,
 				callTimeConfidence.indexOf(")")));
-		// Write wr = new Write();
+
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where CallingTimeId IN ("
 				+ "select CallingTimeId  from t_callingtime where CallingTimeName='"
 				+ callTimeInput + "')";
@@ -955,32 +905,23 @@ public class itemDao {
 				callTimeFireLevelid = rs.getInt("FireLevelid");
 				String callTimeFireLevelName = rs.getString("FireLevelName");
 				System.out.println("calltime:" + callTimeFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[ºô½Ð´ÎÊý"+callTimeInput+" ] => $ÊÂ¼þ¡ú("+callTimeFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + callTimeInput
-						+ "]¡úºô½Ð´ÎÊýitemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]â†’å‘¼å«æ¬¡æ•°itemDao=>" + "{" + addressInput + "}" + "->"
 						+ callTimeFireLevelName;
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void phaseDispatch(String addressInput, String phaseInput,
 			String phaseConfidence) {
 		// TODO Auto-generated method stub
 		Integer phaseFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		String newConfidence = phaseConfidence;
@@ -988,7 +929,6 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where StageId IN ("
 				+ "select StageId  from t_stage where StageName='"
 				+ phaseInput
@@ -999,31 +939,22 @@ public class itemDao {
 				phaseFireLevelid = rs.getInt("FireLevelid");
 				String phaseFireLevelName = rs.getString("FireLevelName");
 				System.out.println("stage:" + phaseFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[½×¶Î"+phaseInput+" ] => $ÊÂ¼þ¡ú("+phaseFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + phaseInput
-						+ "]¡úËù´¦½×¶ÎitemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]â†’æ‰€å¤„é˜¶æ®µitemDao=>" + "{" + addressInput + "}" + "->"
 						+ phaseFireLevelName;
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void situationDispatch(String addressInput,
 			String situationInput, String situationConfidence) {
 		// TODO Auto-generated method stub
 		Integer fireFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		String newConfidence = situationConfidence;
@@ -1031,7 +962,6 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where FireId IN ("
 				+ "select fireId  from t_fire where fireName='"
 				+ situationInput + "')";
@@ -1041,31 +971,22 @@ public class itemDao {
 				fireFireLevelid = rs.getInt("FireLevelid");
 				String fireFireLevelName = rs.getString("FireLevelName");
 				System.out.println("fire:" + fireFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[»ðÊÆ"+situationInput+" ] => $ÊÂ¼þ¡ú("+fireFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + situationInput
-						+ "]¡ú»ðÊÆitemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]â†’ç«åŠ¿itemDao=>" + "{" + addressInput + "}" + "->"
 						+ fireFireLevelName;
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void spreadDispatch(String addressInput, String spreadInput,
 			String spreadConfidence) {
 		// TODO Auto-generated method stub
 		Integer spreadFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		String newConfidence = spreadConfidence;
@@ -1073,7 +994,6 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where SpreadingId IN ("
 				+ "select SpreadingId  from t_spreading where SpreadingName='"
 				+ spreadInput + "')";
@@ -1083,32 +1003,24 @@ public class itemDao {
 				spreadFireLevelid = rs.getInt("FireLevelid");
 				String spreadFireLevelName = rs.getString("FireLevelName");
 				System.out.println("spread:" + spreadFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[ÂûÑÓÇé¿ö"+spreadInput+" ] => $ÊÂ¼þ¡ú("+spreadFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "[" + spreadInput
-						+ "]" + "¡úÂûÑÓÇé¿öitemDao" + "=> {" + addressInput + "}¡ú"
+						+ "]" + "â†’è”“å»¶æƒ…å†µitemDao" + "=> {" + addressInput + "}â†’"
 						+ "(" + spreadFireLevelName + ")(" + df.format(1.0 * f)
 						+ "," + df.format(0.9 * c) + ")";
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void trapedPeopleDispatch(String addressInput,
 			String trapedPeopleInput, String trapedPeopleConfidence) {
 		// TODO Auto-generated method stub
 		Integer trapedFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		String newConfidence = trapedPeopleConfidence;
@@ -1116,7 +1028,6 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where TrappedpeopleId IN ("
 				+ "select TrappedpeopleId  from t_trappedpeople where TrappedpeopleName='"
 				+ trapedPeopleInput + "')";
@@ -1126,33 +1037,24 @@ public class itemDao {
 				trapedFireLevelid = rs.getInt("FireLevelid");
 				String trapedFireLevelName = rs.getString("FireLevelName");
 				System.out.println("traped:" + trapedFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[±»À§ÈËÊý"+trapedPeopleInput+" ] => $ÊÂ¼þ¡ú("+trapedFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "["
-						+ trapedPeopleInput + "]" + "¡ú±»À§ÈËÊý" + "=> {"
-						+ addressInput + "}¡ú" + "(" + trapedFireLevelName
+						+ trapedPeopleInput + "]" + "â†’è¢«å›°äººæ•°" + "=> {"
+						+ addressInput + "}â†’" + "(" + trapedFireLevelName
 						+ ")(" + df.format(1.0 * f) + "," + df.format(0.9 * c)
 						+ ")";
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void hurtPeopleDispatch(String addressInput,
 			String hurtPeopleInput, String hurtPeopleConfidence) {
 		// TODO Auto-generated method stub
 		Integer hurtFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		String newConfidence = hurtPeopleConfidence;
@@ -1160,7 +1062,7 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
+
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where InjuredPeolpeId IN ("
 				+ "select InjuredPleopleId  from t_injuredpleople where InjuredPleopleName='"
 				+ hurtPeopleInput + "')";
@@ -1170,32 +1072,24 @@ public class itemDao {
 				hurtFireLevelid = rs.getInt("FireLevelid");
 				String hurtFireLevelName = rs.getString("FireLevelName");
 				System.out.println("hurt:" + hurtFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[ÊÜÉËÈËÊý"+hurtPeopleInput+" ] => $ÊÂ¼þ¡ú("+hurtFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "["
-						+ hurtPeopleInput + "]" + "¡úÊÜÉËÈËÊý" + "=> {"
-						+ addressInput + "}¡ú" + "(" + hurtFireLevelName + ")£¨"
-						+ df.format(1.0 * f) + "," + df.format(0.9 * c) + "£©";
+						+ hurtPeopleInput + "]" + "â†’å—ä¼¤äººæ•°" + "=> {"
+						+ addressInput + "}â†’" + "(" + hurtFireLevelName + ")ï¼ˆ"
+						+ df.format(1.0 * f) + "," + df.format(0.9 * c) + "ï¼‰";
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*
-	 * ²Ù×÷Õß:Nady ¹¦ÄÜ£ºÔö¼ÓÁË²ÎÊýString addressInput£¬±ãÓÚÔÚ½çÃæÖÐÏÔÊ¾»ðÔÖÃû³Æ
-	 */
 	public static void deathPeopleDispatch(String addressInput,
 			String deathPeopleInput, String deathPeopleConfidence) {
 		// TODO Auto-generated method stub
 		Integer deathFireLevelid = null;
-		// ÉèÖÃÐ¡ÊýÎ»Êý
+		// è®¾ç½®å°æ•°ä½æ•°
 		DecimalFormat df = new DecimalFormat("0.00");
 
 		String newConfidence = deathPeopleConfidence;
@@ -1203,7 +1097,6 @@ public class itemDao {
 				newConfidence.indexOf("(") + 1, newConfidence.indexOf(",")));
 		float c = Float.parseFloat(newConfidence.substring(
 				newConfidence.indexOf(",") + 1, newConfidence.indexOf(")")));
-		// Write wr = new Write();
 		String sql = "select FireLevelid,FireLevelName from t_firelevel where DeathTollid IN ("
 				+ "select DeathTollId  from t_deathtoll where DeathTollName='"
 				+ deathPeopleInput + "')";
@@ -1213,19 +1106,14 @@ public class itemDao {
 				deathFireLevelid = rs.getInt("FireLevelid");
 				String deathFireLevelName = rs.getString("FireLevelName");
 				System.out.println("death:" + deathFireLevelName);
-				// DecisionIFrame.ResultStr =
-				// DecisionIFrame.ResultStr+'\n'+"$ÊÂ¼þ¡ú[ËÀÍöÈËÊý"+deathPeopleInput+" ] => $ÊÂ¼þ¡ú("+deathFireLevelName+")£¨"+df.format(1.0*f)+","+df.format(0.9*c)+"£©";
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "["
-						+ deathPeopleInput + "]" + "¡úËÀÍöÈËÊý" + "=> {"
-						+ addressInput + "}¡ú" + "(" + deathFireLevelName + ")("
+						+ deathPeopleInput + "]" + "â†’æ­»äº¡äººæ•°" + "=> {"
+						+ addressInput + "}â†’" + "(" + deathFireLevelName + ")("
 						+ df.format(1.0 * f) + "," + df.format(0.9 * c) + ")";
 
 			}
-			// wr.data = Float.toString(f);
-			// wr.write();
-			// wr.data = Float.toString(c);
-			// wr.write();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
