@@ -840,7 +840,7 @@ public class itemDao {
 				System.out.println("area:" + areaFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + areaInput
-						+ "]→面积itemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]→面积=>" + "{" + addressInput + "}" + "->"
 						+ areaFireLevelName;
 				System.out.println("ResultStr=" + DecisionIFrame.ResultStr);
 
@@ -875,7 +875,7 @@ public class itemDao {
 					System.out.println("!!!!!!!!!1");
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + volumeInput
-						+ "]→容积itemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]→容积=>" + "{" + addressInput + "}" + "->"
 						+ volumeFireLevelName;
 
 			}
@@ -907,7 +907,7 @@ public class itemDao {
 				System.out.println("calltime:" + callTimeFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + callTimeInput
-						+ "]→呼叫次数itemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]→呼叫次数=>" + "{" + addressInput + "}" + "->"
 						+ callTimeFireLevelName;
 
 			}
@@ -941,7 +941,7 @@ public class itemDao {
 				System.out.println("stage:" + phaseFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + phaseInput
-						+ "]→所处阶段itemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]→所处阶段=>" + "{" + addressInput + "}" + "->"
 						+ phaseFireLevelName;
 
 			}
@@ -973,7 +973,7 @@ public class itemDao {
 				System.out.println("fire:" + fireFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*[" + situationInput
-						+ "]→火势itemDao=>" + "{" + addressInput + "}" + "->"
+						+ "]→火势=>" + "{" + addressInput + "}" + "->"
 						+ fireFireLevelName;
 
 			}
@@ -1005,7 +1005,7 @@ public class itemDao {
 				System.out.println("spread:" + spreadFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "[" + spreadInput
-						+ "]" + "→蔓延情况itemDao" + "=> {" + addressInput + "}→"
+						+ "]" + "→蔓延情况" + "=> {" + addressInput + "}→"
 						+ "(" + spreadFireLevelName + ")(" + df.format(1.0 * f)
 						+ "," + df.format(0.9 * c) + ")";
 

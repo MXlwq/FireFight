@@ -358,7 +358,7 @@ public class Dao {
 					 */
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ areaInput + "]" + "→燃烧面积dao" + "=> {"
+							+ areaInput + "]" + "→燃烧面积" + "=> {"
 							+ addressInput + "}→" + "(" + areaFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -459,7 +459,7 @@ public class Dao {
 					System.out.println("volume:" + volumeFireLevelName);
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ volumeInput + "]" + "→燃烧容积Dao" + "=> {"
+							+ volumeInput + "]" + "→燃烧容积" + "=> {"
 							+ addressInput + "}→" + "(" + volumeFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -567,7 +567,7 @@ public class Dao {
 					System.out.println("calltime:" + callTimeFireLevelName);
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ callTimeInput + "]" + "→呼叫次数Dao" + "=> {"
+							+ callTimeInput + "]" + "→呼叫次数" + "=> {"
 							+ addressInput + "}→" + "(" + callTimeFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -784,7 +784,7 @@ public class Dao {
 					// DecisionIFrame.ResultStr+'\n'+"$事件→[火势"+situationInput+" ] => $事件→("+fireFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ situationInput + "]" + "→火势Dao" + "=> {"
+							+ situationInput + "]" + "→火势" + "=> {"
 							+ addressInput + "}→" + "(" + fireFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -901,7 +901,7 @@ public class Dao {
 						// DecisionIFrame.ResultStr+'\n'+"$事件→[蔓延情况"+spreadInput+" ] => $事件→("+spreadFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 						DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 								+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-								+ spreadInput + "]" + "→蔓延情况Dao" + "=> {"
+								+ spreadInput + "]" + "→蔓延情况" + "=> {"
 								+ addressInput + "}→" + "("
 								+ spreadFireLevelName + ")（"
 								+ df.format(1.0 * f) + "," + df.format(0.9 * c)
@@ -1004,7 +1004,7 @@ public class Dao {
 					// DecisionIFrame.ResultStr+'\n'+"$事件→[被困人数"+trapedPeopleInput+" ] => $事件→("+trapedFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ trapedPeopleInput + "]" + "→被困人数Dao" + "=> {"
+							+ trapedPeopleInput + "]" + "→被困人数" + "=> {"
 							+ addressInput + "}→" + "(" + trapedFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -1112,7 +1112,7 @@ public class Dao {
 					// DecisionIFrame.ResultStr+'\n'+"$事件→[受伤人数"+hurtPeopleInput+" ] => $事件→("+hurtFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ hurtPeopleInput + "]" + "→受伤人数Dao" + "=> {"
+							+ hurtPeopleInput + "]" + "→受伤人数" + "=> {"
 							+ addressInput + "}→" + "(" + hurtFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -1218,7 +1218,7 @@ public class Dao {
 					// DecisionIFrame.ResultStr+'\n'+"$事件→[死亡人数"+deathPeopleInput+" ] => $事件→("+deathFireLevelName+")（"+df.format(1.0*f)+","+df.format(0.9*c)+"）";
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ deathPeopleInput + "]" + "→死亡人数Dao" + "=> {"
+							+ deathPeopleInput + "]" + "→死亡人数" + "=> {"
 							+ addressInput + "}→" + "(" + deathFireLevelName
 							+ ")（" + df.format(1.0 * f) + ","
 							+ df.format(0.9 * c) + "）";
@@ -1347,7 +1347,7 @@ public class Dao {
 				LevelId = rs.getInt("conclusion");
 				Read re = new Read();
 				re.S[0] = rs.getInt("conclusion");
-				System.out.println("最终级别Dao：LevelId=" + LevelId);
+				System.out.println("最终级别：LevelId=" + LevelId);
 				// 最终级别已获取，类别已获取
 
 				// 交集运算
@@ -1422,7 +1422,7 @@ public class Dao {
 						}
 
 						DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
-								+ '\n' + "{" + addressInput + "}DAO"
+								+ '\n' + "{" + addressInput + "}"
 								+ "→[火灾类别 " + fireTypeDes + "]+[火灾级别 "
 								+ fireLevelDes + "] =>" + "{" + addressInput
 								+ "}" + "→(出动人数:" + FireFighterNum + ")+(设备数目:"
@@ -1448,8 +1448,8 @@ public class Dao {
 																	 * "→"+
 																	 */""
 								+ "出动人数:" + FireFighterNum + "\n设备数目:"
-								+ Equipment + '\n' + "（Frequency="
-								+ df.format(1.0 * f) + ",Confidence="
+								+ Equipment + '\n' + "（频率="
+								+ df.format(1.0 * f) + ",可信度="
 								+ df.format(0.9 * c) + "）";
 
 						Statement stmt = (Statement) conn.createStatement();

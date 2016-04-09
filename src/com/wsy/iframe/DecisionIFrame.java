@@ -211,12 +211,10 @@ public class DecisionIFrame extends JInternalFrame {
 						}
 						sum += array[i];
 						if (sum >= 10) {
-							System.out.println("END！！！！！！！！！");
 							submitMsg();
 							command.setText(ResultStr);
 							JOptionPane.showMessageDialog(null,
 									DecisionIFrame.Plan);
-							System.out.println("Exec！！！！！！！！！");
 						}
 					}
 				} catch (Exception e2) {
@@ -237,12 +235,10 @@ public class DecisionIFrame extends JInternalFrame {
 			int index1, index2, index3, index4, index5, index6, index7;
 			String content = command.getText();
 			if (content.charAt(content.length() - 1) == '\n') {
-				//System.out.println("有换行");
 				command.setText(content.substring(0, content.length() - 1));
 				if (t != 0) {
 					JOptionPane.showMessageDialog(null, "已忽略该问题");
 					array[t] = 1;
-					// System.out.println("t:"+t);
 					t++;
 				} else {
 					if (array[t] == 0)
@@ -254,11 +250,9 @@ public class DecisionIFrame extends JInternalFrame {
 
 				flag = true;
 			} else {
-				//System.out.println("没有换行");
 				String[] destString = content.split("\n");
 				String switchString;
 				String contentNeed = destString[destString.length - 1];
-				//System.out.println("contentNeed~~~"+contentNeed);
 				index1 = contentNeed.indexOf('{');
 				index2 = contentNeed.indexOf('}');
 				index3 = contentNeed.indexOf('[');
@@ -272,7 +266,6 @@ public class DecisionIFrame extends JInternalFrame {
 					content1 = contentNeed.substring(index3 + 1, index4);
 					content2 = contentNeed.substring(index6, index7 + 1);
 					switchString = contentNeed.substring(index5 + 1, index6);
-					//System.out.println("@@@@"+content0+"@@@@"+content1+"@@@@"+content2+"@@@@"+switchString);
 					whichSwitch(switchString, content);
 				} catch (Exception e) {
 					// TODO: handle exception
