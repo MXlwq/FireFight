@@ -14,33 +14,30 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-import com.wsy.dao.Dao;
 import com.wsy.model.Operater;
 import com.wsy.util.MyDocument;
 
-import javax.swing.plaf.basic.BasicInternalFrameUI;
-
-
-public class GengGaiMiMa extends JInternalFrame{
+public class GengGaiMiMa extends JInternalFrame {
 	private JLabel name;
 	private JPasswordField oldPass;
 	private JPasswordField newPass2;
 	private JPasswordField newPass1;
 	private JLabel userName;
 	private JTextField username;
-	private Operater user = LoginIFrame.getUser(); 
-	
+	private Operater user = LoginIFrame.getUser();
+
 	public GengGaiMiMa() {
 		super();
-		
+
 		setIconifiable(true);
 		setTitle("更改密码");
 		setClosable(true);
 		getContentPane().setLayout(new GridBagLayout());
 		setBounds(100, 100, 330, 228);
-		//去掉标题栏
-		((BasicInternalFrameUI)getUI()).setNorthPane(null);
+		// 去掉标题栏
+		((BasicInternalFrameUI) getUI()).setNorthPane(null);
 		final JLabel label_4 = new JLabel();
 		label_4.setFont(new Font("", Font.PLAIN, 14));
 		label_4.setForeground(Color.RED);
@@ -51,7 +48,7 @@ public class GengGaiMiMa extends JInternalFrame{
 		gridBagConstraints_10.gridx = 0;
 		gridBagConstraints_10.gridy = 0;
 		getContentPane().add(label_4, gridBagConstraints_10);
-		
+
 		final JLabel label_5 = new JLabel();
 		label_5.setFont(new Font("", Font.PLAIN, 14));
 		label_5.setText("登  录  名：");
@@ -60,16 +57,15 @@ public class GengGaiMiMa extends JInternalFrame{
 		gridBagConstraints_11.gridx = 0;
 		getContentPane().add(label_5, gridBagConstraints_11);
 
-		username  =new JTextField(user.getName());
+		username = new JTextField(user.getName());
 		final GridBagConstraints gridBagConstraints_12 = new GridBagConstraints();
 		gridBagConstraints_12.gridy = 2;
 		gridBagConstraints_12.gridx = 1;
 		gridBagConstraints_12.fill = GridBagConstraints.HORIZONTAL;
 		getContentPane().add(username, gridBagConstraints_12);
-		
+
 		username.setEditable(false);
-		
-		
+
 		final JLabel label_1 = new JLabel();
 		label_1.setFont(new Font("", Font.PLAIN, 14));
 		label_1.setText("旧  密  码：");
@@ -134,35 +130,40 @@ public class GengGaiMiMa extends JInternalFrame{
 
 		final JButton button = new JButton();
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(final ActionEvent e) {
 				if (oldPass.getText().equals(user.getPassword())) {
 					if (newPass1.getText().equals(newPass2.getText())) {
 						user.setPassword(newPass1.getText());
-						//Dao.Updatepass(user.getPassword(),user.getName());
+						// Dao.Updatepass(user.getPassword(),user.getName());
 						oldPass.setText(null);
 						newPass1.setText(null);
 						newPass2.setText(null);
-						JOptionPane.showMessageDialog(getContentPane(), "密码修改成功。");
+						JOptionPane.showMessageDialog(getContentPane(),
+								"密码修改成功。");
 						doDefaultCloseAction();
-					}else {
-						JOptionPane.showMessageDialog(getContentPane(), "两次输入的密码不一致，请重新输入。");
+					} else {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"两次输入的密码不一致，请重新输入。");
 					}
-				}else {
-					JOptionPane.showMessageDialog(getContentPane(), "旧密码输入错误，请确认密码。");
+				} else {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"旧密码输入错误，请确认密码。");
 				}
 			}
 		});
 		button.setText("确认");
 		final GridBagConstraints gridBagConstraints_8 = new GridBagConstraints();
 		gridBagConstraints_8.weighty = 1.0;
-		//gridBagConstraints_8.anchor = GridBagConstraints.LINE_START;
+		// gridBagConstraints_8.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints_8.gridy = 6;
 		gridBagConstraints_8.gridx = 0;
-		//gridBagConstraints_8.fill = GridBagConstraints.HORIZONTAL;
+		// gridBagConstraints_8.fill = GridBagConstraints.HORIZONTAL;
 		getContentPane().add(button, gridBagConstraints_8);
 
 		final JButton button_1 = new JButton();
 		button_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(final ActionEvent e) {
 				oldPass.setText(null);
 				newPass1.setText(null);
@@ -175,19 +176,18 @@ public class GengGaiMiMa extends JInternalFrame{
 		gridBagConstraints_9.weighty = 1.0;
 		gridBagConstraints_9.gridy = 6;
 		gridBagConstraints_9.gridx = 1;
-		//gridBagConstraints_9.fill = GridBagConstraints.HORIZONTAL;
+		// gridBagConstraints_9.fill = GridBagConstraints.HORIZONTAL;
 		getContentPane().add(button_1, gridBagConstraints_9);
-		
-		
-		
+
 		final JButton buttonclose = new JButton();
 		buttonclose.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {		// 添加关闭按钮的事件监听器
-			
+			@Override
+			public void actionPerformed(final ActionEvent e) { // 添加关闭按钮的事件监听器
+
 				doDefaultCloseAction();
 			}
 		});
-		
+
 		buttonclose.setText("返回");
 		final GridBagConstraints gridBagConstraints_13 = new GridBagConstraints();
 		gridBagConstraints_13.gridwidth = 2;
@@ -195,12 +195,9 @@ public class GengGaiMiMa extends JInternalFrame{
 		gridBagConstraints_13.gridy = 6;
 		gridBagConstraints_13.gridx = 3;
 		gridBagConstraints_8.anchor = GridBagConstraints.EAST;
-		//gridBagConstraints_13.fill = GridBagConstraints.HORIZONTAL;
-		getContentPane().add(buttonclose,gridBagConstraints_13);
-		
-		
-		
-		
+		// gridBagConstraints_13.fill = GridBagConstraints.HORIZONTAL;
+		getContentPane().add(buttonclose, gridBagConstraints_13);
+
 		setVisible(true);
 	}
 }

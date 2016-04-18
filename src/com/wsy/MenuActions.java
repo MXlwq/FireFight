@@ -97,6 +97,7 @@ public class MenuActions {
 
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("更改密码") || frames.get("更改密码").isClosed()) {
 				GengGaiMiMa iframe = new GengGaiMiMa();
@@ -113,6 +114,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "用户信息维护");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("用户信息维护")
 					|| frames.get("用户信息维护").isClosed()) {
@@ -130,6 +132,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "自动生成规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("自动生成规则")
 					|| frames.get("自动生成规则").isClosed()) {
@@ -147,6 +150,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "用户添加");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("用户信息添加")
 					|| frames.get("用户信息添加").isClosed()) {
@@ -166,6 +170,7 @@ public class MenuActions {
 
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			if (!frames.containsKey("生成派遣方案")
@@ -187,6 +192,7 @@ public class MenuActions {
 
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("类别判定管理")
 					|| frames.get("类别判定管理").isClosed()) {
@@ -205,6 +211,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "维护火灾类别规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("维护火灾类别规则")
 					|| frames.get("维护火灾类别规则").isClosed()) {
@@ -223,6 +230,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "添加火灾类别规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("添加火灾类别规则")
 					|| frames.get("添加火灾类别规则").isClosed()) {
@@ -240,6 +248,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "添加燃烧物规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("添加燃烧物规则")
 					|| frames.get("添加燃烧物规则").isClosed()) {
@@ -258,6 +267,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "维护火灾级别");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			if (!frames.containsKey("维护火灾级别规则")
@@ -277,6 +287,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "添加火灾级别规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("添加火灾级别规则")
 					|| frames.get("添加火灾级别相关规则").isClosed()) {
@@ -295,6 +306,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "维护派遣方案规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("维护派遣方案规则")
 					|| frames.get("维护派遣方案规则").isClosed()) {
@@ -315,6 +327,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "添加派遣方案规则");
 		}
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!frames.containsKey("添加派遣方案规则")
 					|| frames.get("添加派遣方案规则").isClosed()) {
@@ -332,6 +345,7 @@ public class MenuActions {
 			putValue(Action.SHORT_DESCRIPTION, "退出系统");
 		}
 
+		@Override
 		public void actionPerformed(final ActionEvent e) {
 			System.exit(0);
 		}

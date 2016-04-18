@@ -21,12 +21,9 @@ import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-import org.jfree.ui.RefineryUtilities;
-
 import com.wsy.dao.Dao;
 import com.wsy.dao.clear;
 import com.wsy.dao.itemDao;
-import com.wsy.iframe.UserModiAndDelIFrame.CloseActionListener;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -58,28 +55,29 @@ public class DecisionIFrame extends JInternalFrame {
 	static String content0;
 	static String content1;
 	static String content2;
-	String addressInput;
-	String fireTypeInput;
-	String areaInput;
-	String volumeInput;
-	String spreadInput;
-	String deathPeopleInput;
-	String hurtPeopleInput;
-	String trapedPeopleInput;
-	String situationInput;
-	String phaseInput;
-	String callTimeInput;
-	String addressConfidence;
-	String fireTypeConfidence;
-	String areaConfidence;
-	String volumeConfidence;
-	String spreadConfidence;
-	String callTimeConfidence;
-	String deathPeopleConfidence;
-	String hurtPeopleConfidence;
-	String trapedPeopleConfidence;
-	String situationConfidence;
-	String phaseConfidence;
+	// 20160418修正，因为在数据库中的判断标准是和""做比较，因此，此处应该默认初始化为""
+	String addressInput = "";
+	String fireTypeInput = "";
+	String areaInput = "";
+	String volumeInput = "";
+	String spreadInput = "";
+	String deathPeopleInput = "";
+	String hurtPeopleInput = "";
+	String trapedPeopleInput = "";
+	String situationInput = "";
+	String phaseInput = "";
+	String callTimeInput = "";
+	String addressConfidence = "";
+	String fireTypeConfidence = "";
+	String areaConfidence = "";
+	String volumeConfidence = "";
+	String spreadConfidence = "";
+	String callTimeConfidence = "";
+	String deathPeopleConfidence = "";
+	String hurtPeopleConfidence = "";
+	String trapedPeopleConfidence = "";
+	String situationConfidence = "";
+	String phaseConfidence = "";
 
 	/**
 	 * } Auto-generated main method to display this JFrame
@@ -96,6 +94,7 @@ public class DecisionIFrame extends JInternalFrame {
 		}
 
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				DecisionIFrame inst = new DecisionIFrame();
 				// inst.setLocationRelativeTo(null);
@@ -183,6 +182,7 @@ public class DecisionIFrame extends JInternalFrame {
 	}
 
 	class CloseActionListener implements ActionListener { // 添加关闭按钮的事件监听器
+		@Override
 		public void actionPerformed(final ActionEvent e) {
 			doDefaultCloseAction();
 			t = 0;
@@ -194,10 +194,12 @@ public class DecisionIFrame extends JInternalFrame {
 	}
 
 	class CustomKeyListener implements KeyListener {
+		@Override
 		public void keyTyped(KeyEvent e) {
 
 		}
 
+		@Override
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				getContent(t);
@@ -205,13 +207,14 @@ public class DecisionIFrame extends JInternalFrame {
 				try {
 					for (int i = 0; i < 10; i++) {
 						if (array[i] == 0) {
-							// System.out.println("i:"+i);
 							JOptionPane.showMessageDialog(null, strings[i]);
 							break;
 						}
 						sum += array[i];
 						if (sum >= 10) {
+							System.out.println("submitMsg之前");
 							submitMsg();
+							System.out.println("submitMsg之后");
 							command.setText(ResultStr);
 							JOptionPane.showMessageDialog(null,
 									DecisionIFrame.Plan);
@@ -224,6 +227,7 @@ public class DecisionIFrame extends JInternalFrame {
 			}
 		}
 
+		@Override
 		public void keyReleased(KeyEvent e) {
 		}
 	}
@@ -287,7 +291,7 @@ public class DecisionIFrame extends JInternalFrame {
 	}
 
 	public void whichSwitch(String s, String content) {
-		String eqString=s;
+		String eqString = s;
 		if (eqString.equals("火灾类别")) {
 			fireTypeInput = content1;
 			fireTypeConfidence = content2;
@@ -295,16 +299,16 @@ public class DecisionIFrame extends JInternalFrame {
 			itemDao.close();
 			array[0] = 1;
 			t++;
-			System.out.println("火灾类别");
+
 		} else if (eqString.equals("火灾面积")) {
 			areaInput = content1;
 			areaConfidence = content2;
-			//System.out.println("我是输出："+areaInput+areaConfidence);
+
 			itemDao.areaDispatch(content0, content1, content2);
 			itemDao.close();
 			array[1] = 1;
 			t++;
-			System.out.println("火灾面积");
+
 		} else if (eqString.equals("火灾容积")) {
 			volumeInput = content1;
 			volumeConfidence = content2;
@@ -312,7 +316,7 @@ public class DecisionIFrame extends JInternalFrame {
 			itemDao.close();
 			array[2] = 1;
 			t++;
-			System.out.println("火灾容积");
+
 		} else if (eqString.equals("呼叫次数")) {
 			callTimeInput = content1;
 			callTimeConfidence = content2;
@@ -325,7 +329,7 @@ public class DecisionIFrame extends JInternalFrame {
 			phaseConfidence = content2;
 			itemDao.phaseDispatch(content0, content1, content2);
 			itemDao.close();
-			System.out.println("所处阶段运行");
+
 			array[4] = 1;
 			t++;
 		} else if (eqString.equals("火灾火势")) {
@@ -333,7 +337,7 @@ public class DecisionIFrame extends JInternalFrame {
 			situationInput = content1;
 			situationConfidence = content2;
 			itemDao.situationDispatch(content0, content1, content2);
-			
+
 			itemDao.close();
 			array[5] = 1;
 			t++;

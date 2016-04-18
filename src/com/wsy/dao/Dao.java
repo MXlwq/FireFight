@@ -270,23 +270,13 @@ public class Dao {
 	 * 
 	 * ) throws SQLException {
 	 */
-	public static void Dispatch(
-			String addressInput,
-			String areaInput,
-			String volumeInput,
-			// String controlRankInput, //从界面删除20150717
-			String spreadInput,
-			// String changeSituationInput,
-			String deathPeopleInput, String hurtPeopleInput,
-			String trapedPeopleInput, String situationInput, String phaseInput,
-			String callTimeInput, String fireTypeInput,
-			String addressConfidence,
-			String areaConfidence,
-			String volumeConfidence,
-			String spreadConfidence,
-			// String controlRankConfidence, //从界面删除20150717
-			String callTimeConfidence,
-			// String changeSituationConfidence,
+	public static void Dispatch(String addressInput, String areaInput,
+			String volumeInput, String spreadInput, String deathPeopleInput,
+			String hurtPeopleInput, String trapedPeopleInput,
+			String situationInput, String phaseInput, String callTimeInput,
+			String fireTypeInput, String addressConfidence,
+			String areaConfidence, String volumeConfidence,
+			String spreadConfidence, String callTimeConfidence,
 			String deathPeopleConfidence, String hurtPeopleConfidence,
 			String trapedPeopleConfidence, String situationConfidence,
 			String phaseConfidence, String fireTypeConfidence)
@@ -301,7 +291,6 @@ public class Dao {
 		Integer trapedFireLevelid = null;
 		Integer hurtFireLevelid = null;
 		Integer deathFireLevelid = null;
-		// Integer fireTypeId = null;
 
 		// 清空之前的记录
 		if (conn == null)
@@ -311,7 +300,7 @@ public class Dao {
 		cstmt.executeUpdate();
 		cstmt.close();
 
-		Statement stmt0 = (Statement) conn.createStatement();
+		Statement stmt0 = conn.createStatement();
 		String sql0 = "insert into tempLearn select * from t_learn";
 		stmt0.execute(sql0);
 		sql0 = "insert into tempSimilarity select * from t_similarity";
@@ -319,7 +308,6 @@ public class Dao {
 
 		// 设置小数位数
 		DecimalFormat df = new DecimalFormat("0.00");
-		
 
 		if ((areaConfidence != null) && (areaInput != null)) {
 			// areaInput
@@ -333,7 +321,7 @@ public class Dao {
 
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select AreaId  from t_area where AreaName='" + areaInput
 					+ "')");
@@ -358,10 +346,10 @@ public class Dao {
 					 */
 					DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
 							+ "\r\n" + "{" + addressInput + "}" + "*" + "["
-							+ areaInput + "]" + "→燃烧面积" + "=> {"
-							+ addressInput + "}→" + "(" + areaFireLevelName
-							+ ")（" + df.format(1.0 * f) + ","
-							+ df.format(0.9 * c) + "）";
+							+ areaInput + "]" + "→燃烧面积" + "=> {" + addressInput
+							+ "}→" + "(" + areaFireLevelName + ")（"
+							+ df.format(1.0 * f) + "," + df.format(0.9 * c)
+							+ "）";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -438,7 +426,7 @@ public class Dao {
 							newConfidence.indexOf(")")));
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select VolumeId  from t_volume where VolumeName='"
 					+ newInput + "')");
@@ -539,7 +527,7 @@ public class Dao {
 				new Dao();
 
 			System.out.println("f=" + f + " c=" + c);
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select CallingTimeId  from t_callingtime where CallingTimeName='"
 					+ newInput + "')");
@@ -646,7 +634,7 @@ public class Dao {
 							newConfidence.indexOf(")")));
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select StageId  from t_stage where StageName='"
 					+ newInput + "')");
@@ -761,7 +749,7 @@ public class Dao {
 							newConfidence.indexOf(")")));
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select fireId  from t_fire where fireName='" + newInput
 					+ "')");
@@ -863,7 +851,7 @@ public class Dao {
 							newConfidence.indexOf(")")));
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select SpreadingId  from t_spreading where SpreadingName='"
 					+ newInput + "')");
@@ -975,7 +963,7 @@ public class Dao {
 							newConfidence.indexOf(")")));
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select TrappedpeopleId  from t_trappedpeople where TrappedpeopleName='"
 					+ newInput + "')");
@@ -1083,7 +1071,7 @@ public class Dao {
 
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select InjuredPleopleId  from t_injuredpleople where InjuredPleopleName='"
 					+ newInput + "')");
@@ -1190,7 +1178,7 @@ public class Dao {
 							newConfidence.indexOf(")")));
 			if (conn == null)
 				new Dao();
-			Statement stmt = (Statement) conn.createStatement();
+			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("insert into t_input(input) ("
 					+ "select DeathTollId  from t_deathtoll where DeathTollName='"
 					+ newInput + "')");
@@ -1346,7 +1334,7 @@ public class Dao {
 				float c2 = rs.getFloat("c");
 				LevelId = rs.getInt("conclusion");
 				Read re = new Read();
-				re.S[0] = rs.getInt("conclusion");
+				Read.S[0] = rs.getInt("conclusion");
 				System.out.println("最终级别：LevelId=" + LevelId);
 				// 最终级别已获取，类别已获取
 
@@ -1422,11 +1410,11 @@ public class Dao {
 						}
 
 						DecisionIFrame.ResultStr = DecisionIFrame.ResultStr
-								+ '\n' + "{" + addressInput + "}"
-								+ "→[火灾类别 " + fireTypeDes + "]+[火灾级别 "
-								+ fireLevelDes + "] =>" + "{" + addressInput
-								+ "}" + "→(出动人数:" + FireFighterNum + ")+(设备数目:"
-								+ Equipment + ")（" + df.format(1.0 * f) + ","
+								+ '\n' + "{" + addressInput + "}" + "→[火灾类别 "
+								+ fireTypeDes + "]+[火灾级别 " + fireLevelDes
+								+ "] =>" + "{" + addressInput + "}" + "→(出动人数:"
+								+ FireFighterNum + ")+(设备数目:" + Equipment
+								+ ")（" + df.format(1.0 * f) + ","
 								+ df.format(0.9 * c) + "）";
 
 						DecisionIFrame.Plan = DecisionIFrame.Plan + /*
@@ -1452,7 +1440,7 @@ public class Dao {
 								+ df.format(1.0 * f) + ",可信度="
 								+ df.format(0.9 * c) + "）";
 
-						Statement stmt = (Statement) conn.createStatement();
+						Statement stmt = conn.createStatement();
 						stmt.executeUpdate("insert into t_conclusion values("
 								+ conclu + "," + f + "," + c + ")");
 						System.out.println("FireFighterNum=" + FireFighterNum
@@ -1533,13 +1521,13 @@ public class Dao {
 						float c3 = (c1 * (1 - c2) + c2 * (1 - c1))
 								/ (c1 * (1 - c2) + c2 * (1 - c1) + (1 - c1)
 										* (1 - c2));
-						Statement stmt = (Statement) conn.createStatement();
+						Statement stmt = conn.createStatement();
 						stmt.executeUpdate("update mConclusion" + " set f="
 								+ f3 + ",c=" + c3 + " where conclusion = "
 								+ newId);
 
 					} else {
-						Statement stmt = (Statement) conn.createStatement();
+						Statement stmt = conn.createStatement();
 						stmt.executeUpdate("insert into mConclusion(conclusion) values("
 								+ newId + ")");
 
@@ -1582,13 +1570,13 @@ public class Dao {
 						float c3 = (c1 * (1 - c2) + c2 * (1 - c1))
 								/ (c1 * (1 - c2) + c2 * (1 - c1) + (1 - c1)
 										* (1 - c2));
-						Statement stmt = (Statement) conn.createStatement();
+						Statement stmt = conn.createStatement();
 						stmt.executeUpdate("update mConclusion" + " set f="
 								+ f3 + ",c=" + c3 + " where conclusion = "
 								+ newId);
 
 					} else {
-						Statement stmt = (Statement) conn.createStatement();
+						Statement stmt = conn.createStatement();
 						stmt.executeUpdate("insert into mConclusion(conclusion) values("
 								+ newId + ")");
 
@@ -1611,7 +1599,7 @@ public class Dao {
 		// TODO Auto-generated method stub
 		if (conn == null)
 			new Dao();
-		Statement stmt = (Statement) conn.createStatement();
+		Statement stmt = conn.createStatement();
 
 		// 补全新插入t_input的信息
 		stmt.executeUpdate("update t_input" + " set conclusion = " + cid

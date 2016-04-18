@@ -98,7 +98,7 @@ public class itemDao {
 
 		if (conn == null)
 			new itemDao();
-		Statement stmt = (Statement) conn.createStatement();
+		Statement stmt = conn.createStatement();
 		stmt.executeUpdate("insert into t_input(input) ("
 				+ "select AreaId  from t_area where AreaName='" + areaInput
 				+ "')");
@@ -1005,9 +1005,9 @@ public class itemDao {
 				System.out.println("spread:" + spreadFireLevelName);
 				DecisionIFrame.ResultStr = DecisionIFrame.ResultStr + "\r\n"
 						+ "{" + addressInput + "}" + "*" + "[" + spreadInput
-						+ "]" + "→蔓延情况" + "=> {" + addressInput + "}→"
-						+ "(" + spreadFireLevelName + ")(" + df.format(1.0 * f)
-						+ "," + df.format(0.9 * c) + ")";
+						+ "]" + "→蔓延情况" + "=> {" + addressInput + "}→" + "("
+						+ spreadFireLevelName + ")(" + df.format(1.0 * f) + ","
+						+ df.format(0.9 * c) + ")";
 
 			}
 

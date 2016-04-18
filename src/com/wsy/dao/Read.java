@@ -1,15 +1,9 @@
 package com.wsy.dao;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-
-import com.wsy.iframe.*;
-
-import org.jfree.ui.RefineryUtilities;
 
 public class Read {
 	/**
@@ -41,18 +35,16 @@ public class Read {
 							lineTxt = bufferedReader.readLine();
 							String lineTxt2 = bufferedReader.readLine();
 							S[j] = Float.parseFloat(lineTxt);
-							System.out.println("S[j]=========="+S[j]);
+							System.out.println("S[j]==========" + S[j]);
 							S[++j] = Float.parseFloat(lineTxt2);
-							System.out.println("S[++j]=========="+S[j]);
+							System.out.println("S[++j]==========" + S[j]);
 							j++;
-						} 
-						else{
+						} else {
 							bufferedReader.readLine();
 							bufferedReader.readLine();
 						}
-							
-					} 
-					else{
+
+					} else {
 						S[j] = 0;
 						j++;
 					}

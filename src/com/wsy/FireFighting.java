@@ -84,6 +84,7 @@ public class FireFighting extends JFrame {
 
 		// ´°Ìå±³¾°
 		DESKTOP_PANE.addComponentListener(new ComponentAdapter() {
+			@Override
 			public void componentResized(final ComponentEvent e) {
 				Dimension size = e.getComponent().getSize();
 				label.setSize(e.getComponent().getSize());
