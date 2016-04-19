@@ -36,16 +36,16 @@ import com.wsy.dao.itemDao;
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class DecisionIFrame extends JInternalFrame {
-
+	String content;
 	public static String ResultStr = "";
 	public static String Plan = "";
 	public final LineChartDemo demo = new LineChartDemo("信念曲线图");
 	static String[] strings = { "有火灾类别的信息吗?必须输入火灾类别信息",
-			"有火灾面积的信息吗?有请输入，忽略该问题请回车", "有火灾容积的信息吗?有请输入，忽略该问题请回车",
-			"有呼叫次数的信息吗?有请输入，忽略该问题请回车", "有所处阶段的信息吗?有请输入，忽略该问题请回车",
-			"有火灾火势的信息吗?有请输入，忽略该问题请回车", "有蔓延状态的信息吗?有请输入，忽略该问题请回车",
-			"有被困人数的信息吗?有请输入，忽略该问题请回车", "有受伤人数的信息吗?有请输入，忽略该问题请回车",
-			"有死亡人数的信息吗?有请输入，忽略该问题请回车" };
+			"有火灾面积的信息吗?有，请直接输入，否则，请回车忽略该问题", "有火灾容积的信息吗?有，请直接输入，否则，请回车忽略该问题",
+			"有呼叫次数的信息吗?有，请直接输入，否则，请回车忽略该问题", "有所处阶段的信息吗?有，请直接输入，否则，请回车忽略该问题",
+			"有火灾火势的信息吗?有，请直接输入，否则，请回车忽略该问题", "有蔓延状态的信息吗?有，请直接输入，否则，请回车忽略该问题",
+			"有被困人数的信息吗?有，请直接输入，否则，请回车忽略该问题", "有受伤人数的信息吗?有，请直接输入，否则，请回车忽略该问题",
+			"有死亡人数的信息吗?有，请直接输入，否则，请回车忽略该问题" };
 	private JButton btnBack;
 	private JTextArea command;
 	private JScrollPane jScrollPane1;
@@ -207,14 +207,14 @@ public class DecisionIFrame extends JInternalFrame {
 				try {
 					for (int i = 0; i < 10; i++) {
 						if (array[i] == 0) {
-							JOptionPane.showMessageDialog(null, strings[i]);
+							content = command.getText();
+							command.setText(content + "\n" + strings[i]);
+							// JOptionPane.showMessageDialog(null, strings[i]);
 							break;
 						}
 						sum += array[i];
 						if (sum >= 10) {
-							System.out.println("submitMsg之前");
 							submitMsg();
-							System.out.println("submitMsg之后");
 							command.setText(ResultStr);
 							JOptionPane.showMessageDialog(null,
 									DecisionIFrame.Plan);
@@ -232,22 +232,25 @@ public class DecisionIFrame extends JInternalFrame {
 		}
 	}
 
+	// 20160419修改，取消对话框，只有最终结果以对话框形式出现
 	private void getContent(int b) {
 		t = b;
 		try {
 			boolean flag = false;
 			int index1, index2, index3, index4, index5, index6, index7;
-			String content = command.getText();
+			content = command.getText();
 			if (content.charAt(content.length() - 1) == '\n') {
 				command.setText(content.substring(0, content.length() - 1));
 				if (t != 0) {
-					JOptionPane.showMessageDialog(null, "已忽略该问题");
+					// JOptionPane.showMessageDialog(null, "已忽略该问题");
+					command.setText(content + "已忽略该问题");
 					array[t] = 1;
 					t++;
 				} else {
-					if (array[t] == 0)
-						JOptionPane.showMessageDialog(null, "必须输入火灾类别，请输入");
-					else {
+					if (array[t] == 0) {
+						// JOptionPane.showMessageDialog(null, "必须输入火灾类别，请输入");
+						command.setText(content + "\n" + "必须输入火灾类别，请输入");
+					} else {
 						t++;
 					}
 				}
@@ -273,9 +276,11 @@ public class DecisionIFrame extends JInternalFrame {
 					whichSwitch(switchString, content);
 				} catch (Exception e) {
 					// TODO: handle exception
-					if (flag == false)
-						JOptionPane.showMessageDialog(null,
-								"输入格式有问题，请按{}*[]→(,)格式输入！");
+					if (flag == false) {
+						// JOptionPane.showMessageDialog(null,"输入格式有问题，请按{}*[]→(,)格式输入！");
+						command.setText(content + "\n"
+								+ "输入格式有问题，请按{}*[]→(,)格式输入！");
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -370,7 +375,8 @@ public class DecisionIFrame extends JInternalFrame {
 			array[9] = 1;
 			t++;
 		} else {
-			JOptionPane.showMessageDialog(null, "输入格式有问题，请重新输入！");
+			command.setText(content + "\n" + "输入格式有问题，请重新输入！");
+			// JOptionPane.showMessageDialog(null, "输入格式有问题，请重新输入！");
 		}
 		// 20160307修改，保留原用户输入
 		command.setText(content + ResultStr);
