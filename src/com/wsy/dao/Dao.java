@@ -309,7 +309,7 @@ public class Dao {
 		// 设置小数位数
 		DecimalFormat df = new DecimalFormat("0.00");
 
-		if ((areaConfidence != null) && (areaInput != null)) {
+		if ((areaConfidence != "") && (areaInput != "")) {
 			// areaInput
 			// 插入输入表---------
 			float f = Float.parseFloat(areaConfidence.substring(

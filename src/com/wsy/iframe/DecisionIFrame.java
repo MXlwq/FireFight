@@ -202,37 +202,43 @@ public class DecisionIFrame extends JInternalFrame {
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				int sum = 0;
-				try {
-					for (int i = 0; i < 10; i++) {
+
+				for (int i = 0; i < 10; i++) {
+					if (array[i] == 0) {
+						getContent(i);
+						content = command.getText();
 						if (array[i] == 0) {
-							getContent(i);
-							content = command.getText();
-							if (array[i] == 0) {
-								command.setText(content + "\n" + strings[i]);
-							} else {
-								for (int j = i + 1; j < 10; j++) {
+							System.out.println("i:" + i + strings[i]);
+							command.setText(content + "\n" + strings[i]);
+						} else {
+							for (int j = i + 1; j < 10; j++) {
+								try {
 									if (array[j] == 0) {
+										System.out.println("j:" + j);
 										command.setText(content + "\n"
 												+ strings[j]);
 										break;
 									}
+								} catch (Exception e2) {
+									// TODO: handle exception
+									command.setText(content + "\n" + "输入完毕");
 								}
-							}
-							// JOptionPane.showMessageDialog(null, strings[i]);
-							break;
-						}
-						sum += array[i];
 
-						if (sum >= 10) {
-							submitMsg();
-							command.setText(ResultStr);
-							JOptionPane.showMessageDialog(null,
-									DecisionIFrame.Plan);
+							}
 						}
+						// JOptionPane.showMessageDialog(null, strings[i]);
+						break;
 					}
-				} catch (Exception e2) {
-					// TODO: handle exception
-					command.setText(content + "\n" + "输入的条件过少，请重新输入");
+					sum += array[i];
+
+					System.out.println("sum" + sum);
+					if (sum >= 10) {
+						System.out.println("sum>=10");
+						submitMsg();
+						command.setText(ResultStr);
+						JOptionPane
+								.showMessageDialog(null, DecisionIFrame.Plan);
+					}
 				}
 
 			}
@@ -258,6 +264,7 @@ public class DecisionIFrame extends JInternalFrame {
 
 			}
 		} else {
+			// System.out.println("我在和");
 			String[] destString = content.split("\n");
 			String switchString;
 			String contentNeed = destString[destString.length - 1];
